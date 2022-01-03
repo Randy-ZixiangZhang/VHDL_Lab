@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -o "/home/randy/Documents/IDEA/rcs1/tb_register16bit_isim_beh.exe" -prj "/home/randy/Documents/IDEA/rcs1/tb_register16bit_beh.prj" "work.tb_register16bit" 
