@@ -61,36 +61,25 @@ ARCHITECTURE behavior OF tb_register16bit IS
    constant Clock_period : time := 10 ns;
  
 BEGIN
- 
+	-- put clock here, not in the process
+	Clock <= not Clock after 1ns;
+	
+	
 	-- Instantiate the Unit Under Test (UUT)
    uut: register16bit PORT MAP (
           ENABLE => ENABLE,
           Clock => Clock,
           D => D,
-          Q => Q
+          Q => Q	
         );
 
-   -- Clock process definitions
-   Clock_process :process
-   begin
-		--Clock <= '0';
-		--wait for Clock_period/2;
-		--Clock <= '1';
-		--wait for Clock_period/2;
-		Clock <= not Clock after 1ns;
-   end process;
-	
-	-- Enable Process 
-	Enable_process:
-	process begin
-		ENABLE <= '0','1' after 10ns;
-	end process;
- 
+	-- not include them in process, or error
+	ENABLE <= '0','1' after 10ns,
+						'0' after 20ns,
+						'1' after 45ns;
+						
 
-   -- Stimulus process
-   stim_proc: 
-	process begin		
-			Q <= x"0000",
+			D <= x"0000",
 			x"0001" after 10ns,
 			x"0001" after 15ns,
 			x"0003" after 20ns,
@@ -101,6 +90,5 @@ BEGIN
 			x"ffff" after 45ns,
 			x"8000" after 50ns,
 			x"8000" after 55ns;
-   end process;
 
-END;
+END behavior;
