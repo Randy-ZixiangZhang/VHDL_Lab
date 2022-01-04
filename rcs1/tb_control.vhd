@@ -79,6 +79,8 @@ BEGIN
 	-- put clock here, not in the process
 	Clk <= not Clk after 1ns;
 	Start <= '0','1' after 0.5ns,
-					 '0' after 3.5ns;
+					 '0' after 1.5ns,
+					 '1' after 25ns,
+					 '0' after 26.5ns;
 
 END;
