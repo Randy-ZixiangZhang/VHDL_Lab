@@ -40,7 +40,7 @@ architecture Behavioral of mux2x1 is
 	
 begin
 
-	process(S) is
+	process(S,D0,D1) is
 	begin
 		case S is
 			when '0' =>
