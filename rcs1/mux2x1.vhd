@@ -40,6 +40,16 @@ architecture Behavioral of mux2x1 is
 	
 begin
 
-
+	process(S) is
+	begin
+		case S is
+			when '0' =>
+				O <= D0;
+			when '1' =>
+				O <= D1;
+			when others =>
+				O <= "XXXXXXXXXXXXXXXX"; --must use "", error using ''
+		end case;
+	end process;
 end Behavioral;
 
