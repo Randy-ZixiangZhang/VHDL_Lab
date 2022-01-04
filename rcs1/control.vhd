@@ -19,7 +19,7 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
 --use IEEE.NUMERIC_STD.ALL;
@@ -38,10 +38,55 @@ entity control is
            S : out  STD_LOGIC);
 end control;
 
-architecture Behavioral of control is
+architecture Structural of control is
+
+
+	
+	signal isready:std_logic := '1';
+	signal round_count: STD_LOGIC_VECTOR (3 downto 0):= "1000";
+	
 
 begin
 
+	--using one process
+	process(start,CLK) 
+		begin
+		if (CLK = '1' and CLK'EVENT)--rising edge
+		then
+			if isready = '0' then
+			
+				case round_count is
+					when "1000" =>
+						isready <= '0';
+						ready <= isready;
+						S <= '0';
+						EN <= '1';
+						round_count <= "0000";
+						ROUND <= "0000";
+					when "0111" =>
+						isready <= '1';
+						ready <= isready;
+						EN <= '0';
+						round_count <= "1000";
+						ROUND <= round_count;
+					when others =>
+						S <= '1';
+						round_count <= round_count + "0001";
+						ROUND <= round_count;
+				end case;		
+				
+			elsif (start = '1') and (isready = '1') then
+				isready <= '0';
+				round <= round_count;--"1000"
+				READY <= '1';
+				EN <= '0';
+				S <= '1';
+			end if;
+		end if;
 
-end Behavioral;
+	end process;
+
+
+
+end structural;
 

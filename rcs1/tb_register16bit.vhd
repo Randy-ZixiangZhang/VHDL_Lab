@@ -80,15 +80,15 @@ BEGIN
 						
 
 			D <= x"0000",
-			x"0001" after 10ns,
-			x"0001" after 15ns,
-			x"0003" after 20ns,
-			x"0003" after 25ns,
-			x"7fff" after 30ns,
-			x"7fff" after 35ns,
-			x"ffff" after 40ns,
-			x"ffff" after 45ns,
-			x"8000" after 50ns,
-			x"8000" after 55ns;
+				x"0001" after 10ns,
+				x"0001" after 15ns,
+				x"0003" after 20ns,
+				x"0003" after 25ns,
+				x"7fff" after 30ns,
+				x"7fff" after 35ns,
+				x"ffff" after 40ns,
+				x"ffff" after 45ns,
+				x"8000" after 50ns,
+				x"8000" after 55ns;
 
 END behavior;
