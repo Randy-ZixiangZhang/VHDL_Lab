@@ -51,9 +51,9 @@ entity datapath is
            Y1 : out  STD_LOGIC_VECTOR (15 downto 0);
            Y2 : out  STD_LOGIC_VECTOR (15 downto 0);
            Y3 : out  STD_LOGIC_VECTOR (15 downto 0);
-           Y4 : out  STD_LOGIC_VECTOR (15 downto 0);
+           Y4 : out  STD_LOGIC_VECTOR (15 downto 0)
 			  
-
+			);
 			  
 end datapath;
 
@@ -96,13 +96,13 @@ architecture Structural of datapath is
 	
 	
 	
-	signal mux1_output, mux2_output, mux3_output, mux4_output std_logic_vector(15 downto 0);
+	signal mux1_output, mux2_output, mux3_output, mux4_output: std_logic_vector(15 downto 0);
 	signal register1_output, register2_output, register3_output, register4_output,
-			 register5_output, register6_output, register7_output, register8_output 
+			 register5_output, register6_output, register7_output, register8_output: 
 			 std_logic_vector(15 downto 0);
-	signal mulop_output std_logic_vector(15 downto 0);
-	signal addop_output std_logic_vector(15 downto 0);
-	signal xorop_output std_logic_vector(15 downto 0);
+	signal mulop_output: std_logic_vector(15 downto 0);
+	signal addop_output: std_logic_vector(15 downto 0);
+	signal xorop_output: std_logic_vector(15 downto 0);
 	
 begin
 	mux1:mux4x1 port map(
@@ -184,21 +184,21 @@ begin
 	reg2:register16bit port map(
 		ENABLE =>EN125 ,
 		Clock =>CLK,
-		D =>mulop_output,
+		D =>addop_output,
 		Q =>register2_output
 	);
 
 	reg3:register16bit port map(
 		ENABLE =>EN346,
 		Clock =>CLK,
-		D =>mulop_output,
+		D =>addop_output,
 		Q =>register3_output
 	);
 
 	reg4:register16bit port map(
 		ENABLE =>EN346,
 		Clock =>CLK,
-		D =>addop_output,
+		D =>mulop_output,
 		Q =>register4_output
 	);
 

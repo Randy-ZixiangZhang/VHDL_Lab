@@ -56,8 +56,82 @@ end clockedround;
 
 architecture Structural of clockedround is
 
-begin
+    COMPONENT datapath
+    Port ( CLK : in  STD_LOGIC;
+			  EN125 : in  STD_LOGIC;
+           EN346 : in  STD_LOGIC;
+           EN78 : in  STD_LOGIC;
+           S : in  STD_LOGIC_VECTOR(1 downto 0);
 
+           X1 : in  STD_LOGIC_VECTOR (15 downto 0);
+           X2 : in  STD_LOGIC_VECTOR (15 downto 0);
+           X3 : in  STD_LOGIC_VECTOR (15 downto 0);
+           X4 : in  STD_LOGIC_VECTOR (15 downto 0);
+           Z1 : in  STD_LOGIC_VECTOR (15 downto 0);
+           Z2 : in  STD_LOGIC_VECTOR (15 downto 0);
+           Z3 : in  STD_LOGIC_VECTOR (15 downto 0);
+           Z4 : in  STD_LOGIC_VECTOR (15 downto 0);
+           Z5 : in  STD_LOGIC_VECTOR (15 downto 0);
+           Z6 : in  STD_LOGIC_VECTOR (15 downto 0);
+           Y1 : out  STD_LOGIC_VECTOR (15 downto 0);
+           Y2 : out  STD_LOGIC_VECTOR (15 downto 0);
+           Y3 : out  STD_LOGIC_VECTOR (15 downto 0);
+           Y4 : out  STD_LOGIC_VECTOR (15 downto 0)
+			);
+    END COMPONENT;
+ 
+    COMPONENT control
+    PORT(
+         CLK : IN  std_logic;
+         INIT : IN  std_logic;
+         TRAFO : IN  std_logic;
+         EN125 : OUT  std_logic;
+         EN346 : OUT  std_logic;
+         EN78 : OUT  std_logic;
+         RESULT : OUT  std_logic;
+         S : OUT  std_logic_vector(1 downto 0);
+         S_T : OUT  std_logic_vector(1 downto 0)
+        );
+    END COMPONENT;
+    
+	 
+	signal en125,en346,en78: std_logic;
+	signal mux_s: std_logic_vector(1 downto 0);
+	
+	 
+	 
+begin
+control1:control port map(
+			CLK => CLK,
+			INIT => INIT,
+			EN125 => en125,
+			EN346 => en346,
+			EN78 => en78,
+			S => mux_s,
+			TRAFO => TRAFO
+			);
+
+datapath1:datapath port map(
+			CLK => CLK,
+			X1 => X1,
+			X2 => X2,
+			X3 => X3,
+			X4 => X4,
+			Z1 => Z1,
+			Z2 => Z2,
+			Z3 => Z3,
+			Z4 => Z4,
+			Z5 => Z5,
+			Z6 => Z6,
+			Y1 => Y1,
+			Y2 => Y2,
+			Y3 => Y3,
+			Y4 => Y4,
+			S => mux_s,
+			EN125 => en125,
+			EN346 => en346,
+			EN78 => en78
+			);
 
 end Structural;
 
