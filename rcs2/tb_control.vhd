@@ -2,10 +2,10 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   16:07:51 01/04/2022
+-- Create Date:   17:43:20 02/02/2022
 -- Design Name:   
--- Module Name:   /home/randy/Documents/VHDL_praktikum/IDEA/rcs1/tb_control.vhd
--- Project Name:  idea_rcs1
+-- Module Name:   /home/randy/Documents/VHDL_praktikum/IDEA/rcs2/tb_control.vhd
+-- Project Name:  idea_rcs2
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
@@ -42,24 +42,30 @@ ARCHITECTURE behavior OF tb_control IS
     COMPONENT control
     PORT(
          CLK : IN  std_logic;
-         START : IN  std_logic;
-         ROUND : OUT  std_logic_vector(3 downto 0);
-         READY : OUT  std_logic;
-         EN : OUT  std_logic;
-         S : OUT  std_logic
+         INIT : IN  std_logic;
+         TRAFO : IN  std_logic;
+         EN125 : OUT  std_logic;
+         EN346 : OUT  std_logic;
+         EN78 : OUT  std_logic;
+         RESULT : OUT  std_logic;
+         S : OUT  std_logic_vector(1 downto 0);
+         S_T : OUT  std_logic_vector(1 downto 0)
         );
     END COMPONENT;
     
 
    --Inputs
    signal CLK : std_logic := '0';
-   signal START : std_logic := '0';
+   signal INIT : std_logic := '0';
+   signal TRAFO : std_logic := '0';
 
  	--Outputs
-   signal ROUND : std_logic_vector(3 downto 0);
-   signal READY : std_logic;
-   signal EN : std_logic;
-   signal S : std_logic;
+   signal EN125 : std_logic;
+   signal EN346 : std_logic;
+   signal EN78 : std_logic;
+   signal RESULT : std_logic;
+   signal S : std_logic_vector(1 downto 0);
+   signal S_T : std_logic_vector(1 downto 0);
 
    -- Clock period definitions
    constant CLK_period : time := 10 ns;
@@ -69,18 +75,20 @@ BEGIN
 	-- Instantiate the Unit Under Test (UUT)
    uut: control PORT MAP (
           CLK => CLK,
-          START => START,
-          ROUND => ROUND,
-          READY => READY,
-          EN => EN,
-          S => S
+          INIT => INIT,
+          TRAFO => TRAFO,
+          EN125 => EN125,
+          EN346 => EN346,
+          EN78 => EN78,
+          RESULT => RESULT,
+          S => S,
+          S_T => S_T
         );
-	
-	-- put clock here, not in the process
-	Clk <= not Clk after 1ns;
-	Start <= '0','1' after 0.5ns,
-					 '0' after 1.5ns,
-					 '1' after 25ns,
-					 '0' after 26.5ns;
+
+	Clk <= not Clk after 10ns;
+	INIT <= '0','1' after 5ns,
+					'0' after 15ns,
+					'1' after 200ns,
+					'0' after 215ns;
 
 END;

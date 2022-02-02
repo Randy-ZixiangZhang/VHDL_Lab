@@ -42,14 +42,17 @@ architecture Structural of control is
 
 
 	
-	signal isready:std_logic := '1';
-	signal round_count: STD_LOGIC_VECTOR (3 downto 0):= "1000";
+	
+
 	
 
 begin
 
 	--using one process
 	process(start,CLK) 
+		--define variable here, make it signal would have strange simulation results
+		variable isready:std_logic := '1';
+		variable round_count: STD_LOGIC_VECTOR (3 downto 0):= "1000";  
 		begin
 		if (CLK = '1' and CLK'EVENT)--rising edge
 		then
@@ -57,31 +60,34 @@ begin
 			
 				case round_count is
 					when "1000" =>
-						isready <= '0';
-						ready <= isready;
+						
+						Ready <= '0';
 						S <= '0';
 						EN <= '1';
-						round_count <= "0000";
-						ROUND <= "0000";
+						round_count := "0000";
+						ROUND <= round_count;
 					when "0111" =>
-						isready <= '1';
+						isready := '1';
 						ready <= isready;
 						EN <= '0';
-						round_count <= "1000";
+						round_count := round_count + "0001";
 						ROUND <= round_count;
 					when others =>
 						S <= '1';
-						round_count <= round_count + "0001";
+						round_count := round_count + "0001";
 						ROUND <= round_count;
 				end case;		
 				
 			elsif (start = '1') and (isready = '1') then
-				isready <= '0';
-				round <= round_count;--"1000"
+				isready := '0';--internal signal is ready
+				--initialize all outputs
+				round <= "1000";
 				READY <= '1';
 				EN <= '0';
 				S <= '1';
 			end if;
+			
+			
 		end if;
 
 	end process;
