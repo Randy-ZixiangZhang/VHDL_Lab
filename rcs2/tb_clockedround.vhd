@@ -135,11 +135,10 @@ BEGIN
 					'0' after 610ns,
 					'1' after 790ns,
 					'0' after 810ns;
-	--TRAFO <= '0','1' after 190ns,
-	--				'0' after 390ns,
-	--				'1' after 590ns,
+
+	TRAFO <= '1';
 	
-	
+
    stim_proc: process
    begin
 	
@@ -175,6 +174,7 @@ BEGIN
 		Z6 <= x"8888";
 		Wait for clock_period;
    end process;
+
 
 
 END;
