@@ -45,48 +45,96 @@ end control;
 architecture Behavioral of control is
 
 begin
-	S_T <= "00";
-	process(CLK,INIT) --TRAFO as input signal?
+
+	process(CLK,INIT,TRAFO) --TRAFO as input signal?
 		variable internal_state:std_logic_vector(2 downto 0):="000";
 		variable isready:std_logic:='1'; --default ready
 		
 		begin
 		if (CLK = '1' and CLK'EVENT)
 		then
-			if isready = '1' and INIT = '1' then
-				isready := '0';
-				
-			elsif isready = '0' then
-				
-				case internal_state is
-						when "000" =>
-							S <= "00";
-							EN125 <= '1';
-						when "001" =>
-							EN125 <= '0';
-						when "010" =>
-							S <= "01";
-							EN346 <= '1';
-						when "011" =>
-							EN346 <= '0';
-						when "100" =>
-							S <= "10";
-							EN78 <= '1';
-						when "101" =>
-							EN78 <= '0';
-						when "110" =>
-							S <= "11";
-							RESULT <= '1';
-						when "111" =>
-							isready := '1';
-							RESULT <= '0';
-							
-						when others => --"000"
-							
-					end case;
+			case TRAFO is
+				when '0' =>
+					if isready = '1' and INIT = '1' then
+						isready := '0';
+						
+					elsif isready = '0' then
+						
+						case internal_state is
+								when "000" =>
+									S <= "00";
+									S_T <= "00";
+									EN125 <= '1';
+								when "001" =>
+									EN125 <= '0';
+								when "010" =>
+									S <= "01";
+									S_T <= "01";
+									EN346 <= '1';
+								when "011" =>
+									EN346 <= '0';
+								when "100" =>
+									S <= "10";
+									S_T <= "10";
+									EN78 <= '1';
+								when "101" =>
+									EN78 <= '0';
+								when "110" =>
+									S <= "11";
+									S_T <= "11";
+									RESULT <= '1';
+								when "111" =>
+									isready := '1';
+									RESULT <= '0';
+									
+								when others => --"000"
+									
+							end case;
 
-				internal_state:= internal_state + "001";
-			end if;
+						internal_state:= internal_state + "001";
+					end if;
+
+					
+				when '1' =>
+					if isready = '1' and INIT = '1' then
+						isready := '0';
+						
+					elsif isready = '0' then
+						
+						case internal_state is
+								when "000" =>
+									S <= "00";
+									S_T <= "01";
+									EN125 <= '1';
+								when "001" =>
+									EN125 <= '0';
+								when "010" =>
+									S <= "01";
+									S_T <= "00";
+									EN346 <= '1';
+								when "011" =>
+									EN346 <= '0';
+									internal_state:= internal_state + "010";
+								--two internal states removed	
+								when "110" =>
+									S <= "11";
+									S_T <= "10";
+									RESULT <= '1';
+								when "111" =>
+									isready := '1';
+									RESULT <= '0';
+									
+								when others => --"000"
+									
+							end case;
+
+						internal_state:= internal_state + "001";
+					end if;		
+				when others => --"000"
+					
+			end case;
+		
+
 			
 		
 		end if;

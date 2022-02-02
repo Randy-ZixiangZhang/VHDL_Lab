@@ -37,7 +37,7 @@ entity datapath is
            EN346 : in  STD_LOGIC;
            EN78 : in  STD_LOGIC;
            S : in  STD_LOGIC_VECTOR(1 downto 0);
-
+			  S_T : in  STD_LOGIC_VECTOR(1 downto 0);
            X1 : in  STD_LOGIC_VECTOR (15 downto 0);
            X2 : in  STD_LOGIC_VECTOR (15 downto 0);
            X3 : in  STD_LOGIC_VECTOR (15 downto 0);
@@ -51,7 +51,11 @@ entity datapath is
            Y1 : out  STD_LOGIC_VECTOR (15 downto 0);
            Y2 : out  STD_LOGIC_VECTOR (15 downto 0);
            Y3 : out  STD_LOGIC_VECTOR (15 downto 0);
-           Y4 : out  STD_LOGIC_VECTOR (15 downto 0)
+           Y4 : out  STD_LOGIC_VECTOR (15 downto 0);
+			  Y1_trans: out  STD_LOGIC_VECTOR (15 downto 0);
+			  Y2_trans: out  STD_LOGIC_VECTOR (15 downto 0);
+			  Y3_trans: out  STD_LOGIC_VECTOR (15 downto 0);
+			  Y4_trans: out  STD_LOGIC_VECTOR (15 downto 0)
 			  
 			);
 			  
@@ -131,7 +135,7 @@ begin
 		D1 => Z2,
 		D2 => mulop_output,
 		D3 => mulop_output,
-		S => S,
+		S => S_T,
 		O => mux4_output);
 		
 	mulop1:mulop port map(
@@ -230,7 +234,10 @@ begin
 		Q =>register8_output
 	);
 	
-	
+	Y1_trans<= register1_output;
+	Y2_trans<= register2_output;
+	Y3_trans<= register3_output;
+	Y4_trans<= register4_output;
 
 end Structural;
 

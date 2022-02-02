@@ -89,6 +89,12 @@ BEGIN
 	INIT <= '0','1' after 5ns,
 					'0' after 15ns,
 					'1' after 200ns,
-					'0' after 215ns;
+					'0' after 215ns,
+					'1' after 400ns,
+					'0' after 415ns,
+					'1' after 600ns,
+					'0' after 615ns;
+					
+	TRAFO <= '0','1' after 400ns;
 
 END;

@@ -62,7 +62,7 @@ architecture Structural of clockedround is
            EN346 : in  STD_LOGIC;
            EN78 : in  STD_LOGIC;
            S : in  STD_LOGIC_VECTOR(1 downto 0);
-
+			  S_T : in  STD_LOGIC_VECTOR(1 downto 0);
            X1 : in  STD_LOGIC_VECTOR (15 downto 0);
            X2 : in  STD_LOGIC_VECTOR (15 downto 0);
            X3 : in  STD_LOGIC_VECTOR (15 downto 0);
@@ -76,7 +76,11 @@ architecture Structural of clockedround is
            Y1 : out  STD_LOGIC_VECTOR (15 downto 0);
            Y2 : out  STD_LOGIC_VECTOR (15 downto 0);
            Y3 : out  STD_LOGIC_VECTOR (15 downto 0);
-           Y4 : out  STD_LOGIC_VECTOR (15 downto 0)
+           Y4 : out  STD_LOGIC_VECTOR (15 downto 0);
+			  Y1_trans: out  STD_LOGIC_VECTOR (15 downto 0);
+			  Y2_trans: out  STD_LOGIC_VECTOR (15 downto 0);
+			  Y3_trans: out  STD_LOGIC_VECTOR (15 downto 0);
+			  Y4_trans: out  STD_LOGIC_VECTOR (15 downto 0)
 			);
     END COMPONENT;
  
@@ -97,6 +101,7 @@ architecture Structural of clockedround is
 	 
 	signal en125,en346,en78: std_logic;
 	signal mux_s: std_logic_vector(1 downto 0);
+	signal mux_st: std_logic_vector(1 downto 0);
 	
 	 
 	 
@@ -108,7 +113,9 @@ control1:control port map(
 			EN346 => en346,
 			EN78 => en78,
 			S => mux_s,
-			TRAFO => TRAFO
+			S_T => mux_st,
+			TRAFO => TRAFO,
+			RESULT => RESULT
 			);
 
 datapath1:datapath port map(
@@ -128,9 +135,15 @@ datapath1:datapath port map(
 			Y3 => Y3,
 			Y4 => Y4,
 			S => mux_s,
+			S_T => mux_st,
 			EN125 => en125,
 			EN346 => en346,
-			EN78 => en78
+			EN78 => en78,
+			
+			Y1_trans => Y1_TRAFO,
+			Y2_trans => Y2_TRAFO,
+			Y3_trans => Y3_TRAFO,
+			Y4_trans => Y4_TRAFO
 			);
 
 end Structural;

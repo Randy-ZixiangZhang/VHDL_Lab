@@ -135,7 +135,11 @@ BEGIN
 					'0' after 610ns,
 					'1' after 790ns,
 					'0' after 810ns;
-
+	--TRAFO <= '0','1' after 190ns,
+	--				'0' after 390ns,
+	--				'1' after 590ns,
+	
+	
    stim_proc: process
    begin
 	
