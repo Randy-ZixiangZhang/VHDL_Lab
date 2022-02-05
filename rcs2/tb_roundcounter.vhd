@@ -86,24 +86,24 @@ BEGIN
 	Clk <= not Clk after 10ns;
  
 
-	START <= '1','0' after 35ns;
-	RESULT <= '0','1' after 200ns,
-						'0' after 215ns,
-						'1' after 400ns,
-						'0' after 415ns,
-						'1' after 600ns,
-						'0' after 615ns,
-						'1' after 800ns,
-						'0' after 815ns,
-						'1' after 1000ns,
-						'0' after 1015ns,
-						'1' after 1200ns,
-						'0' after 1215ns,
-						'1' after 1400ns,
-						'0' after 1415ns,
-						'1' after 1600ns,
-						'0' after 1615ns,
-						'1' after 1800ns,
-						'0' after 1815ns;
+	START <= '1','0' after 25ns;
+--	RESULT <= '0','1' after 200ns,
+--						'0' after 215ns,
+--						'1' after 400ns,
+--						'0' after 415ns,
+--						'1' after 600ns,
+--						'0' after 615ns,
+--						'1' after 800ns,
+--						'0' after 815ns,
+--						'1' after 1000ns,
+--						'0' after 1015ns,
+--						'1' after 1200ns,
+--						'0' after 1215ns,
+--						'1' after 1400ns,
+--						'0' after 1415ns,
+--						'1' after 1600ns,
+--						'0' after 1615ns,
+--						'1' after 1800ns,
+--						'0' after 1815ns;
 
 END;

@@ -49,6 +49,8 @@ begin
 	process(CLK,INIT,TRAFO) --TRAFO as input signal?
 		variable internal_state:std_logic_vector(2 downto 0):="000";
 		variable isready:std_logic:='1'; --default ready
+		--variable isTrafo:std_logic:='0';
+		
 		
 		begin
 		if (CLK = '1' and CLK'EVENT)
@@ -131,7 +133,9 @@ begin
 						internal_state:= internal_state + "001";
 					end if;		
 				when others => --"000"
-					
+						if isready = '1' and INIT = '1' then
+							isready := '0';
+						end if;
 			end case;
 		
 

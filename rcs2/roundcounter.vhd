@@ -52,7 +52,7 @@ process(CLK,START,RESULT) --TRAFO as input signal?
 	begin
 	if (CLK = '1' and CLK'EVENT) then
 		case state is
-			when "00" =>
+			when "00" => --sleep
 				if isReady = '1' then
 					if START = '1' then
 						state:= "01";--transfers to 01 setup
@@ -62,13 +62,13 @@ process(CLK,START,RESULT) --TRAFO as input signal?
 						state:= "00";--stay in sleep
 					end if;
 				end if;
-			when "01" =>
+			when "01" =>-- set up
 				INIT <= '1';
 				READY <= '0';
 				state:= "10";
-			when "10" =>
+			when "10" => -- cal 
 				INIT <= '0';
-				if RESULT = '0' then
+				if RESULT /= '1' then --change ='0' to '1'
 					case internal_state is
 						when "0000" =>
 							S_i <= '1';

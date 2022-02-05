@@ -158,20 +158,16 @@ begin
 				Z3 => z_3,
 				Z4 => z_4,
 				Z5 => z_5,
-				Z6 => z_6,
---	         Y1 => Y_1,
---				Y2 => Y_2,
---				Y3 => Y_3,
---				Y4 => Y_4,			
---				Y1 => y1_out,
---				Y2 => y2_out,
---				Y3 => y3_out,
---				Y4 => y4_out,
-				RESULT => result
---				Y1_TRAFO => Y_1,
---				Y2_TRAFO => Y_2,
---				Y3_TRAFO => Y_3,
---				Y4_TRAFO => Y_4
+				Z6 => z_6,		
+				Y1 => y1_out,
+				Y2 => y2_out,
+				Y3 => y3_out,
+				Y4 => y4_out,
+				RESULT => result,
+				Y1_TRAFO => Y_1,
+				Y2_TRAFO => Y_2,
+				Y3_TRAFO => Y_3,
+				Y4_TRAFO => Y_4
 	);
 
 	reg1:register16bit port map(
@@ -228,14 +224,4 @@ begin
 		O => mux4_out
 	);
 
-	Y_1 => y1_out;
-	Y_2 => y2_out;
-	Y_3 => y3_out;
-	Y_4 => y4_out;
-
-	y1_out => X_1;
-	y2_out => X_2;
-	y3_out => X_3;
-	y4_out => X_4;
 end Structural;
-
